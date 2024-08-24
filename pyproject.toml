@@ -1,0 +1,7 @@
+[tool.black]
+exclude = '''
+/\.venv
+/\.git
+/Dockerfile
+/docker-compose\.yaml
+'''
