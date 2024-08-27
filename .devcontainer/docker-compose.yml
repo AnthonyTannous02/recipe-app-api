@@ -3,13 +3,14 @@ version: "3.9"
 services:
   app:
     build:
-      context: .
+      context: ..
+      dockerfile: Dockerfile
       args:
         - DEV=true
     ports:
       - "8000:8000"
     volumes:
-      - ./app:/app
+      - ../app:/app
     command: >
       sh -c "python manage.py db_wait_service &&
               python manage.py migrate &&
@@ -19,6 +20,7 @@ services:
       - DB_NAME=devdb
       - DB_USER=devuser
       - DB_PASS=devpass
+      - NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt
     depends_on:
       - db
 
@@ -26,6 +28,8 @@ services:
     image: postgres:13-alpine
     volumes:
       - dev-db-data:/var/lib/postgresql/data
+    ports:
+      - 6543:5432
     environment:
       - POSTGRES_DB=devdb
       - POSTGRES_USER=devuser

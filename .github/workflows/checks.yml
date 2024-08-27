@@ -16,6 +16,6 @@ jobs:
       - name: Git Checkout
         uses: actions/checkout@v2
       - name: Linting
-        run: docker compose run --rm app sh -c "flake8"
+        run: cd .devcontainer && docker compose run --rm app sh -c "flake8"
       - name: Unit Tests
-        run: docker compose run --rm app sh -c "python manage.py db_wait_service && python manage.py test"
+        run: cd .devcontainer && docker compose run --rm app sh -c "python manage.py db_wait_service && python manage.py test"

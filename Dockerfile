@@ -3,9 +3,6 @@ LABEL maintainer="Unknown"
 
 ENV PYTHONUNBUFFERED=1
 
-COPY ./requirements.txt /tmp/requirements.txt
-COPY ./requirements.dev.txt /tmp/requirements.dev.txt
-COPY ./app /app
 WORKDIR /app
 EXPOSE 8000
 
@@ -14,6 +11,8 @@ RUN apk add --update --no-cache postgresql-client && \
     apk add --update --no-cache --virtual .tmp-build-deps \
     build-base postgresql-dev musl-dev
 
+COPY ./requirements.txt /tmp/requirements.txt
+COPY ./requirements.dev.txt /tmp/requirements.dev.txt
 
 ARG DEV=false
 RUN --mount=type=cache,target=/root/.cache/pip \
@@ -30,6 +29,8 @@ RUN --mount=type=cache,target=/root/.cache/pip \
     --home /home/django-user \
     django-user
     
+
+COPY ./app /app
 
 ENV PATH="/py/bin:$PATH"
 
