@@ -1,25 +1,14 @@
 """Tests for Models."""
 
-from unittest import TestCase
-from unittest.mock import patch
-
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AbstractUser
+from django.test import TestCase
 
 from core.models import User
 
 
 class ModelTests(TestCase):
     """Test models."""
-
-    def setUp(self):
-        self.patcher = patch.object(
-            User,
-            User.save.__name__,
-            return_value=None,
-        )
-        self.mock_save = self.patcher.start()
-        self.addCleanup(self.patcher.stop)
 
     def test_create_user_with_email_successful(self):
         """Test create user with email successful"""
