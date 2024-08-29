@@ -12,6 +12,10 @@
         {
             "name": "django",
             "depth": 5
+        },
+        {
+            "name": "rest_framework",
+            "depth": 5
         }
     ],
 }
